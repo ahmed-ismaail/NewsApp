@@ -1,4 +1,4 @@
-package com.example.newsapp.data
+package com.example.newsapp.data.remote
 
 import com.example.newsapp.util.Constants
 import okhttp3.OkHttpClient
@@ -25,7 +25,8 @@ class RetrofitClient {
         }
 
         val api by lazy {
-            retrofit.create(NewsApi::class.java)
+            retrofit.create(
+                NewsApi::class.java)
         }
     }
 }

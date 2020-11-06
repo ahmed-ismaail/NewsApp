@@ -1,7 +1,8 @@
-package com.example.newsapp.data
+package com.example.newsapp.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.newsapp.data.models.Source
 
 @Entity(tableName = "articles")
 data class Article(
