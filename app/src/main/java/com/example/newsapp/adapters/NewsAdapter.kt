@@ -52,7 +52,7 @@ class NewsAdapter (private val onClickListener: OnClickListener): RecyclerView.A
         }
     }
 
-    private val differ = AsyncListDiffer(this, differCallBack)
+    val differ = AsyncListDiffer(this, differCallBack)
 
     class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
