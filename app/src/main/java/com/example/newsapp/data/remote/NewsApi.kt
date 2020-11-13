@@ -18,12 +18,13 @@ interface NewsApi {
         apiKey: String = Constants.API_KEY
     ): Response<NewsResponse>
 
+//https://newsapi.org/v2/everything?q=android&apiKey=80c2e0be242c4772a3fb66327464e527
     @GET("v2/everything")
     suspend fun searchForNews(
-        @Query("country")
+        @Query("q")
         searchQuery: String,
         @Query("page")
-        pagenumber : Int = 1,//to make the request get only the first page (first 20 articles)
+        pageNumber : Int = 1,//to make the request get only the first page (first 20 articles)
         @Query("apiKey")
         apiKey: String = Constants.API_KEY
     ): Response<NewsResponse>

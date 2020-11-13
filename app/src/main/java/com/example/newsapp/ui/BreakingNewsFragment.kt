@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.adapters.NewsAdapter
@@ -56,6 +57,10 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news),
     }
 
     override fun onArticleItemClickListener(article: Article) {
-        TODO("Not yet implemented")
+        val bundle = Bundle().apply {
+            putSerializable("article", article)
+        }
+
+        findNavController().navigate(R.id.action_breakingNewsFragment_to_articleFragment, bundle)
     }
 }
