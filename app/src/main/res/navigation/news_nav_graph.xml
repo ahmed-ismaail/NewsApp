@@ -20,7 +20,7 @@
         android:name="com.example.newsapp.ui.SavedNewsFragment"
         android:label="SavedNewsFragment" >
         <action
-            android:id="@+id/action_savedNewsFragment2_to_articleFragment"
+            android:id="@+id/action_savedNewsFragment_to_articleFragment"
             app:destination="@id/articleFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
