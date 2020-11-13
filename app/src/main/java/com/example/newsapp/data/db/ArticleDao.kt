@@ -6,12 +6,12 @@ import com.example.newsapp.data.models.Article
 
 @Dao
 interface ArticleDao {
-    //onConflict so if you try insert a column already exist replace it
+    //onConflict so if you try insert a article already exist replace it
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(article: Article): Long
 
     @Query("SELECT * FROM articles")
-    fun getAllArticles(): LiveData<Article>
+    fun getAllArticles(): LiveData<List<Article>>
 
     @Delete
     suspend fun deleteArticle(article: Article)

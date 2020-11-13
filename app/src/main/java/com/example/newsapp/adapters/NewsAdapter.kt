@@ -1,6 +1,5 @@
 package com.example.newsapp.adapters
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,8 @@ import com.example.newsapp.R
 import com.example.newsapp.data.models.Article
 import kotlinx.android.synthetic.main.item_article_preview.view.*
 
-class NewsAdapter (private val onClickListener: OnClickListener): RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
-
-
+class NewsAdapter (private val onClickListener: OnClickListener):
+    RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder(
