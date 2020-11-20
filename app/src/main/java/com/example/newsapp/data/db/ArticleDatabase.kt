@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.*
 import com.example.newsapp.data.models.Article
 
-@Database(entities = [Article::class], version = 1)
+@Database(entities = [Article::class], version = 5)
 @TypeConverters(Converter::class)
 abstract class ArticleDatabase : RoomDatabase() {
 
@@ -22,19 +22,12 @@ abstract class ArticleDatabase : RoomDatabase() {
                     context.applicationContext,
                     ArticleDatabase::class.java,
                     "article_db.db"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 Instance = instance
 
                 //return instance
                 instance
             }
         }
-//        private fun createDatabase(context: Context){
-//            Room.databaseBuilder(
-//                context.applicationContext,
-//                ArticleDatabase::class.java,
-//                "article_db.db"
-//                ).build()
-//        }
     }
 }

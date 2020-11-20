@@ -53,7 +53,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), NewsAdapter.
                     //hide progressBar
                     paginationProgressBar.visibility = View.INVISIBLE
                     response.data?.let { newsResponse ->
-                        Log.d(TAG, "An Error Occured: ${response.data}")
+                        Log.d(TAG, "response: ${response.data}")
                         newsAdapter.differ.submitList(newsResponse.articles)
                     }
                 }
