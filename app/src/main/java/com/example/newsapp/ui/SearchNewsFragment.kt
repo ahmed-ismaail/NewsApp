@@ -3,6 +3,7 @@ package com.example.newsapp.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,10 +38,10 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), NewsAdapter.
         var job: Job? = null
         etSearch.addTextChangedListener { text ->
             job?.cancel()
-            job = MainScope().launch{
+            job = MainScope().launch {
                 delay(500L)
                 text?.let {
-                    if(text.toString().isNotEmpty()){
+                    if (text.toString().isNotEmpty()) {
                         viewModel.searchNews(text.toString())
                     }
                 }
@@ -61,7 +62,11 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), NewsAdapter.
                     //hide ProgressBar
                     paginationProgressBar.visibility = View.INVISIBLE
                     response.message?.let { errorMessage ->
-                        Log.d(TAG, "An Error Occurred: $errorMessage")
+                        Toast.makeText(
+                            activity,
+                            "An Error Occurred: $errorMessage",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
                 is Resource.Loading -> {
@@ -71,6 +76,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), NewsAdapter.
             }
         })
     }
+
     override fun onArticleItemClickListener(article: Article) {
         val bundle = Bundle().apply {
             putSerializable("article", article)
