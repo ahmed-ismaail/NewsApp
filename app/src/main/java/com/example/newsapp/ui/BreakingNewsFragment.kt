@@ -35,16 +35,18 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news),
         viewModel.breakingNewsMutableLiveData.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {//when the api call is successful
-                    //hide progressBar
-                    paginationProgressBar.visibility = View.INVISIBLE
+                    //stop and hide shimmer effect
+                    shimmer_container.stopShimmerAnimation()
+                    shimmer_container.visibility = View.GONE
                     response.data?.let { newsResponse ->
                         Log.d(TAG, "response: ${response.data}")
                         newsAdapter.differ.submitList(newsResponse.articles)
                     }
                 }
                 is Resource.Error -> {//when the api call is failed
-                    //hide ProgressBar
-                    paginationProgressBar.visibility = View.INVISIBLE
+                    //stop and hide shimmer effect
+                    shimmer_container.stopShimmerAnimation()
+                    shimmer_container.visibility = View.GONE
                     response.message?.let { errorMessage ->
                         Toast.makeText(
                             activity,
@@ -54,8 +56,8 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news),
                     }
                 }
                 is Resource.Loading -> {
-                    //show ProgressBar
-                    paginationProgressBar.visibility = View.VISIBLE
+                    //show shimmer effect
+                    shimmer_container.startShimmerAnimation()
                 }
             }
         })

@@ -13,6 +13,7 @@ import com.example.newsapp.R
 import com.example.newsapp.adapters.NewsAdapter
 import com.example.newsapp.data.models.Article
 import com.example.newsapp.util.Resource
+import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -51,16 +52,18 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), NewsAdapter.
         viewModel.searchNewsMutableLiveData.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {//when the api call is successful
-                    //hide progressBar
-                    paginationProgressBar.visibility = View.INVISIBLE
+                    //stop and hide shimmer effect
+                    shimmer_containerr.stopShimmerAnimation()
+                    shimmer_containerr.visibility = View.GONE
                     response.data?.let { newsResponse ->
                         Log.d(TAG, "response: ${response.data}")
                         newsAdapter.differ.submitList(newsResponse.articles)
                     }
                 }
                 is Resource.Error -> {//when the api call is failed
-                    //hide ProgressBar
-                    paginationProgressBar.visibility = View.INVISIBLE
+                    //stop and hide shimmer effect
+                    shimmer_containerr.stopShimmerAnimation()
+                    shimmer_containerr.visibility = View.GONE
                     response.message?.let { errorMessage ->
                         Toast.makeText(
                             activity,
@@ -70,8 +73,8 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), NewsAdapter.
                     }
                 }
                 is Resource.Loading -> {
-                    //show ProgressBar
-                    paginationProgressBar.visibility = View.VISIBLE
+                    //show shimmer effect
+                    shimmer_containerr.startShimmerAnimation()
                 }
             }
         })
